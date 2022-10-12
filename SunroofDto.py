@@ -7,6 +7,7 @@ class SunroofDTO:
         self.address = None
         self.lat = None
         self.long = None
+        self.error = None
 
     def __str__(self):
         return str(self.__dict__)

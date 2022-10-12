@@ -18,17 +18,17 @@ class Scraper:
         result = []
         # i = 0
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(headless=False)
             page = browser.new_page(extra_http_headers={'User-Agent': user_agent})
 
             translator = PageToSunroofDtoTranslator()
-            start_time = time.time()
+            # start_time = time.time()
 
             for latLong in latLongs:
                 page.goto(
                     "https://sunroof.withgoogle.com/building/" + str(latLong[0]) + "/" + str(-1*latLong[1]) + "/#?f=buy")
                 result.append(translator.translate(page, latLong))
-
-            print("--- %s seconds per address ---" % ((time.time() - start_time) / len(latLongs)))
+            # if len(latLongs)>0:
+            #     print("--- %s seconds per address ---" % ((time.time() - start_time) / len(latLongs)))
             browser.close()
         return result

@@ -14,7 +14,8 @@ def convertToIterable(result):
             dto.hoursOfUsableSunlightPerYear,
             dto.sqFeetAvailableForSolarPanels,
             dto.recommendedSolarInstallationSizeInKW,
-            dto.recommendedSolarInstallationSizeInSqFt
+            dto.recommendedSolarInstallationSizeInSqFt,
+            dto.error
         ])
     return res
 
@@ -28,17 +29,22 @@ class ScraperThread(threading.Thread):
     def run(self):
         scrapper = Scraper()
         result = scrapper.scrapeByLatLongs(self.latLongs)
-        f = open('output/' + self.filename, 'w')
+        f = open('output/' + self.filename, 'a')
 
         # create the csv writer
         writer = csv.writer(f)
 
-        writer.writerow(["address",
+        writer.writerow([
+            "address",
             "lat",
             "long",
             "hoursOfUsableSunlightPerYear",
             "sqFeetAvailableForSolarPanels",
             "recommendedSolarInstallationSizeInKW",
-            "recommendedSolarInstallationSizeInSqFt"])
+            "recommendedSolarInstallationSizeInSqFt",
+            "error"
+        ])
         # write a row to the csv file
-        writer.writerows(convertToIterable(result))
+        iterable = convertToIterable(result)
+        print(iterable)
+        writer.writerows(iterable)

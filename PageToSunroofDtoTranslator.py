@@ -15,8 +15,15 @@ class PageToSunroofDtoTranslator:
             page.query_selector('.recommended-size', strict=True).inner_text().split(" ")[0])
             result.recommendedSolarInstallationSizeInSqFt = float(
             page.query_selector('.recommended-size', strict=True).inner_text().split("\n")[1][1:-5].replace(",", ""))
+            result.error = "NoError"
         except:
-            print("exception occured")
+            try:
+                result.error = page.query_selector('.notfound-card ').inner_text()
+                # print("not found error")
+            except:
+                result.error = "maybe blocked"
+                page.screenshot(path=str('errorScreenshots/'+latLongAddress[0])+str(latLongAddress[1])+"screenshot.png")
+                print("maybe blocked")
 
         result.lat = latLongAddress[0]
         result.long = latLongAddress[1]
