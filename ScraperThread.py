@@ -48,3 +48,4 @@ class ScraperThread(threading.Thread):
         iterable = convertToIterable(result)
         print(iterable)
         writer.writerows(iterable)
+        f.close()
