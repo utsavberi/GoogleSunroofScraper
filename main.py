@@ -11,7 +11,6 @@ MAX_RECORDS_TO_PROCESS_BEFORE_SLEEP = 2000
 TIME_TO_SLEEP_SEC = 900
 
 if __name__ == '__main__':
-    print()
     threads = []
     start_time = time.time()
     inputFileName = INPUT_FILE_PATH.split("/")[-1].split(".")[0]
