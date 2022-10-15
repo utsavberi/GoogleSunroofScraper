@@ -22,7 +22,7 @@ class PageToSunroofDtoTranslator:
                 # print("not found error")
             except:
                 result.error = "maybe blocked"
-                page.screenshot(path=str('errorScreenshots/'+latLongAddress[0])+str(latLongAddress[1])+"screenshot.png")
+                page.screenshot(path='errorScreenshots/'+str(latLongAddress[0])+str(latLongAddress[1])+"screenshot.png")
                 print("maybe blocked")
 
         result.lat = latLongAddress[0]
