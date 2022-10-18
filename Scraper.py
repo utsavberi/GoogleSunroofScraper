@@ -25,8 +25,10 @@ class Scraper:
             # start_time = time.time()
 
             for latLong in latLongs:
+                context = browser.new_context(record_video_dir="videos/") 
                 page.goto(
                     "https://sunroof.withgoogle.com/building/" + str(latLong[0]) + "/" + str(-1*latLong[1]) + "/#?f=buy")
+                context.close()
                 result.append(translator.translate(page, latLong))
             # if len(latLongs)>0:
             #     print("--- %s seconds per address ---" % ((time.time() - start_time) / len(latLongs)))
